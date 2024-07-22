@@ -13,15 +13,16 @@ func NewRGB(red, green, blue int) *RGB {
 }
 
 func (r *RGB) GetHexCode() string {
-	return fmt.Printf("#%02x%02x%02x", r.red, r.green, r.blue)
+	return fmt.Sprintf("#%02x%02x%02x", r.red, r.green, r.blue)
 }
 
-func (r *RGB) getBits() string {
-
-}
+//func (r *RGB) getBits() string {
+//
+//}
 
 func main() {
-
+	RGB1 := NewRGB(0, 153, 255)
+	fmt.Println(RGB1.GetHexCode())
 }
 
 /*
