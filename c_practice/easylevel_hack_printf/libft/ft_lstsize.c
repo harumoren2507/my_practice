@@ -1,47 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 17:31:11 by retoriya          #+#    #+#             */
-/*   Updated: 2024/04/22 22:26:32 by retoriya         ###   ########.fr       */
+/*   Created: 2024/04/18 13:50:49 by retoriya          #+#    #+#             */
+/*   Updated: 2024/04/20 17:48:53 by retoriya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*current;
-	t_list	*tmp;
+	int	count;
 
-	if (!lst || !del || !*lst)
-		return ;
-	current = *lst;
-	while (current != NULL)
+	count = 0;
+	while (lst != NULL)
 	{
-		del(current->content);
-		tmp = current->next;
-    free(current);
-		current = tmp;
+		count++;
+		lst = lst->next;
 	}
-	*lst = NULL;
+	return (count);
 }
-
-void	delete_content(void *content)
-{
-	free(content);
-}
-
+/*
 int	main(void)
 {
 	t_list	*head;
 	t_list	*second;
 	t_list	*third;
 	t_list	*current;
-	t_list	*temp;
 
 	head = ft_lstnew(strdup("Hello!"));
 	second = ft_lstnew(strdup("42Tokyo"));
@@ -49,16 +38,14 @@ int	main(void)
 	head->next = second;
 	second->next = third;
 	third->next = NULL;
-	printf("Before clearing the list:\n");
+	printf("Before clearing the list:\n\n");
 	current = head;
 	while (current != NULL)
 	{
 		printf("%s\n", (char *)current->content);
 		current = current->next;
 	}
-	ft_lstclear(&head, delete_content);
-	if (head == NULL)
-		printf("After clearing the list, head is now NULL.\n");
+	printf("list count :%d\n", ft_lstsize(head));
 	return (0);
 }
-
+*/

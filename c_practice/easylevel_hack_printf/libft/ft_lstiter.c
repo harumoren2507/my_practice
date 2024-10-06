@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retoriya <retoriya@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 17:31:11 by retoriya          #+#    #+#             */
-/*   Updated: 2024/04/22 22:26:32 by retoriya         ###   ########.fr       */
+/*   Created: 2024/04/18 14:03:14 by retoriya          #+#    #+#             */
+/*   Updated: 2024/04/20 17:47:50 by retoriya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*current;
-	t_list	*tmp;
-
-	if (!lst || !del || !*lst)
+	if (!lst || !f)
 		return ;
-	current = *lst;
-	while (current != NULL)
+	while (lst != NULL)
 	{
-		del(current->content);
-		tmp = current->next;
-    free(current);
-		current = tmp;
+		f(lst->content);
+		lst = lst->next;
 	}
-	*lst = NULL;
 }
-
-void	delete_content(void *content)
+/*
+void	ft_toupper_content(void *content)
 {
-	free(content);
+	char	*str;
+
+	str = (char *)content;
+	while (*str)
+	{
+		if (*str >= 'a' && *str <= 'z')
+			*str -= 32;
+		str++;
+	}
 }
 
 int	main(void)
 {
-	t_list	*head;
-	t_list	*second;
-	t_list	*third;
-	t_list	*current;
-	t_list	*temp;
+	t_list *head;
+	t_list *second;
+	t_list *third;
+	t_list *current;
 
 	head = ft_lstnew(strdup("Hello!"));
 	second = ft_lstnew(strdup("42Tokyo"));
@@ -49,16 +49,21 @@ int	main(void)
 	head->next = second;
 	second->next = third;
 	third->next = NULL;
-	printf("Before clearing the list:\n");
+	printf("Before applying function:\n");
 	current = head;
 	while (current != NULL)
 	{
 		printf("%s\n", (char *)current->content);
 		current = current->next;
 	}
-	ft_lstclear(&head, delete_content);
-	if (head == NULL)
-		printf("After clearing the list, head is now NULL.\n");
+	ft_lstiter(head, ft_toupper_content);
+	current = head;
+	printf("\nafter applying function: \n");
+	while (current != NULL)
+	{
+		printf("%s\n", (char *)current->content);
+		current = current->next;
+	}
 	return (0);
 }
-
+*/
